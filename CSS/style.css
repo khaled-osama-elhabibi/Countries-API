@@ -35,8 +35,7 @@ body {
   height: 300px;
   display: flex;
   flex-flow: row nowrap;
-  margin: 0 auto;
-  margin-top: 100px;
+  margin: 5rem auto 0rem;
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem; }
@@ -76,6 +75,16 @@ body {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4); }
   .country-border:focus {
     outline: none; }
+
+.back-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.6rem; }
+
+.back-container {
+  width: 80%;
+  margin: 5rem auto 0rem; }
 
 .country-screen {
   height: 100vh; }

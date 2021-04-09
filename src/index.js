@@ -1,14 +1,18 @@
+import  MainScreen from "./Main-screen/index.js";
+import CountryScreen from "./Country-screen/index.js"
 let root = document.getElementById('root') ;
 
-class Hi extends React.Component {
+class App extends React.Component{
     render(){
-        return (
-            <h1>rest-countries-api</h1>
-        ) ;
+        return(
+            <div className = "App">
+                <CountryScreen/>
+            </div>
+        )
     }
 }
 
 ReactDOM.render(
-    <Hi/>,
+    <App/>,
     root
 )

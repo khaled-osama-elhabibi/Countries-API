@@ -32,8 +32,8 @@ class Search extends React.Component{
     closeSearch() {this.setState({searchActive : false})}
     isSearchActive = () => (this.state.searchActive)
     searchForCountry(name){
-        axios.get('https://restcountries.eu/rest/v2/name/'+name).then(resp=> 
-        {
+        axios.get('https://restcountries.eu/rest/v2/name/'+name)
+        .then(resp=> {
           this.setState(
             {
               alphaCodes : resp.data.map(element => element["alpha3Code"]) 
@@ -42,12 +42,20 @@ class Search extends React.Component{
               ,searchActive : true
             })
         })
+        .catch(()=>{
+            if(document.getElementsByClassName("control-bar__search__list")[0] != undefined){
+                document.getElementsByClassName("control-bar__search__list")[0].style.display = "none" ;
+            }            
+        })
     }
     pressHandler(e){
         clearTimeout(this.state.timerId) ;
         e.persist();
         this.setState({timerId : setTimeout(()=>{this.searchForCountry(e.target.value);},500)})
-        document.getElementsByClassName("control-bar__search__list")[0].style.display = "inline-block" ;
+        if(document.getElementsByClassName("control-bar__search__list")[0] != undefined){
+            document.getElementsByClassName("control-bar__search__list")[0].style.display = "inline-block" ;
+        }            
+
     }
     getElementStyle(){
         if(this.props.mode === "light"){

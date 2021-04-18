@@ -1,0 +1,33 @@
+.country-min-card{
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: .4);
+    min-height: 325px;
+    width: 250px;
+    display: inline-block;
+    margin: 30px 0px;
+    @media screen and (max-width: $width-medium){
+        margin: 30px auto;
+    }
+    &__flag{
+        width: 100%;
+    }
+    &__name{
+        font-size: 2.4rem;
+        font-weight: 900;    
+        margin: 14px 22px;
+    }
+    &__list{
+        margin: 14px 22px;
+        list-style-type: none;
+        font-size: 1.3rem;
+        line-height: 23px;
+
+        &__item{
+            & > :first-child {
+                font-weight: 600;
+                margin-right: 7px;
+            }
+        }
+    }
+}

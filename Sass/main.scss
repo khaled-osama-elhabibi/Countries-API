@@ -1,9 +1,15 @@
+@import "abstracts/variables";
+  
 @import "base/base" ;
 
 @import "layout/bar" ;     
-
+@import "layout/countries" ;
+             
 @import "components/country" ;
 @import "components/country-border" ;
-@import "components/back-button" ;      
+@import "components/back-button" ;                              
+@import "components/control-bar" ;  
+@import "components/country-min-card" ;
 
-@import "pages/Country-screen" ;   
+@import "pages/Country-screen" ;            
+@import "pages/Main-screen" ;          

@@ -5,11 +5,16 @@ class CountryCard extends React.Component {
     constructor() {
         super();
         this.state = {searched : false};
+        this.getCountryInfo = this.getCountryInfo.bind(this) 
+
     }
-    componentDidMount(){
+    getCountryInfo(){
         axios.get('https://restcountries.eu/rest/v2/alpha/'+this.props.isoAlpha3Code).then(resp => {
             this.setState({...resp.data , searched : true})
         });
+    }
+    componentDidMount(){
+        this.getCountryInfo();
     }
     getCountryInfoItems(countryInfoItemMat){
         return (
@@ -22,10 +27,14 @@ class CountryCard extends React.Component {
         )
     }
     getCountryBorder(arr){
-        if( arr !== undefined ){ 
+        if( arr.length !== 0 ){
             return arr.map(Element => 
             <CountryBorderBtn respond={this.props.respond} key = {Element} countryIsoCode = {Element} />
             )
+        }
+        else{
+            console.log("here")
+            return <span>None!</span>
         }
     }
     render(){
@@ -44,7 +53,6 @@ class CountryCard extends React.Component {
             countryInfoItems = this.getCountryInfoItems(countryInfoItemMat);
             countriesOnBorder = this.getCountryBorder(this.state.borders);
         }
-
         return (
             this.props.isoAlpha3Code ? <div className = 'country' >
               <img className = "country__flag" src = {this.state.flag}/>

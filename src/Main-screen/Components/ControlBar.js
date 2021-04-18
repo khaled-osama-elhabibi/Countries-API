@@ -5,8 +5,14 @@ class ControlBar extends React.Component{
     render(){
         return(
             <div className = "control-bar">
-                <Search respondToApp = {this.props.respondToApp}/>
-                <Filter respond = {this.props.respond}/>
+                <Search
+                    getInfoOfCountry = {this.props.getInfoOfCountry}
+                    mode = {this.props.mode}
+                />
+                <Filter 
+                    respond = {this.props.respond}
+                    mode = {this.props.mode}
+                />
             </div>
         )
     }
@@ -43,6 +49,21 @@ class Search extends React.Component{
         this.setState({timerId : setTimeout(()=>{this.searchForCountry(e.target.value);},500)})
         document.getElementsByClassName("control-bar__search__list")[0].style.display = "inline-block" ;
     }
+    getElementStyle(){
+        if(this.props.mode === "light"){
+            return{
+                color : "black" ,
+                backgroundColor : "hsl(0, 0%, 100%)"
+            }
+        }
+        else if (this.props.mode === "dark")
+        {
+            return{
+                color : "white",
+                backgroundColor : "hsl(209, 23%, 22%)"
+            }
+        }
+    }
     render(){
         let listOfCount = [] ;
         if(this.state.names != undefined){
@@ -52,15 +73,16 @@ class Search extends React.Component{
                 key = {index} 
                 countryCode = {this.state.alphaCodes[index]} 
                 countryFlag = {this.state.flags[index]} 
-                respondToApp = {this.props.respondToApp}
+                getInfoOfCountry = {this.props.getInfoOfCountry}
             />
             )
         }
         return (
             <div className = "control-bar__search-container">
-                <div className = "control-bar__search">
+                <div style = {this.getElementStyle()} className = "control-bar__search">
                     <span className = "material-icons control-bar__search__icon">search</span>
                     <input 
+                    style = {this.getElementStyle()} 
                     className = "control-bar__search__bar" 
                     placeholder = "Search For A Country"
                     onKeyDown = {this.pressHandler} 
@@ -68,7 +90,7 @@ class Search extends React.Component{
                 </div>
                 {
                     this.isSearchActive() ?
-                        <ul className = "control-bar__search__list">
+                        <ul style = {this.getElementStyle()} className = "control-bar__search__list">
                             {listOfCount}
                         </ul> 
                     : ""
@@ -121,18 +143,32 @@ class Filter extends React.Component{
         });
         document.getElementsByClassName("control-bar__filter-list")[0].style.display = "none" ;
     }
-
     onClickHandlerRegions(){
         document.getElementsByClassName("control-bar__filter-list")[0].style.display = "inline-block" ;
+    }
+    getElementStyle(){
+        if(this.props.mode === "light"){
+            return{
+                color : "black" ,
+                backgroundColor : "hsl(0, 0%, 100%)"
+            }
+        }
+        else if (this.props.mode === "dark")
+        {
+            return{
+                color : "white",
+                backgroundColor : "hsl(209, 23%, 22%)"
+            }
+        }
     }
     render(){
         return(
             <div className = "control-bar__filter">
-            <button onClick={this.onClickHandlerRegions} className = "control-bar__filter-btn">
+            <button style = {this.getElementStyle()} onClick={this.onClickHandlerRegions} className = "control-bar__filter-btn">
                 Filter By Region 
                 <span className = "material-icons">expand_more</span>
             </button>
-            <ul className = "control-bar__filter-list">
+            <ul style = {this.getElementStyle()} className = "control-bar__filter-list">
             <li onClick={this.getRegionCountriesInAfrica} className = "control-bar__filter-list-item">Africa</li>
             <li onClick={this.getRegionCountriesInAmericas} className = "control-bar__filter-list-item">Americas</li>
             <li onClick={this.getRegionCountriesInAsia} className = "control-bar__filter-list-item">Asia</li>

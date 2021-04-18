@@ -3,31 +3,34 @@ import CountryScreen from "./Country-screen/index.js"
 let root = document.getElementById('root') ;
 
 document.documentElement.addEventListener('click',()=>{
-    if(document.getElementsByClassName("control-bar__search__list")[0] != undefined)
-    {
-        document.getElementsByClassName("control-bar__search__list")[0].style.display = "none" ;  
-        document.getElementsByClassName("control-bar__filter-list")[0].style.display = "none" ;
-    }
+    if(document.getElementsByClassName("control-bar__search__list")[0] != undefined) 
+    document.getElementsByClassName("control-bar__search__list")[0].style.display = "none" ;  
+    if(document.getElementsByClassName("control-bar__filter-list")[0] != undefined)
+    document.getElementsByClassName("control-bar__filter-list")[0].style.display = "none" ;
 
 })
-  
-
 class App extends React.Component{
     constructor(props){
         super(props) ;
-        this.state = {isSearchActive : false , isoAlpha3Code : "TUR" , countryKey : 0}
-        this.searchActivate = this.searchActivate.bind(this) ;
-        this.searchDeactivate = this.searchDeactivate.bind(this) ;
-        this.respondToApp = this.respondToApp.bind(this) ;
-        this.returnToMainSc = this.returnToMainSc.bind(this) ;
+        this.state = {
+            isSearchActive : false ,
+            isoAlpha3Code : "" ,
+            mode : "light" , 
+            countryKey : 0
+        }
+        this.getInfoOfCountry = this.getInfoOfCountry.bind(this) ;
+        this.backToMainSc = this.backToMainSc.bind(this) ;
+        this.modeChange = this.modeChange.bind(this) 
     }
-    searchDeactivate(){
-        this.setState({isSearchActive : false});
+    modeChange(){
+        this.setState((state)=>{
+            if( state.mode === "dark" )
+            return { mode : "light" }
+            else if( state.mode === "light" )
+            return {mode : "dark"}
+        })
     }
-    searchActivate(){
-        this.setState({isSearchActive : true});
-    }
-    respondToApp(isoAlpha3Code){
+    getInfoOfCountry(isoAlpha3Code){
         this.setState((state)=>{
           return {
             isoAlpha3Code : isoAlpha3Code ,
@@ -36,8 +39,8 @@ class App extends React.Component{
           }
         })  
     }
-    returnToMainSc(){
-        this.setState((state)=>{
+    backToMainSc(){
+        this.setState(()=>{
             return {
               isSearchActive : false ,
               countryKey : 0
@@ -52,10 +55,16 @@ class App extends React.Component{
                     <CountryScreen 
                         key = {this.state.countryKey} 
                         isoAlpha3Code = {this.state.isoAlpha3Code}
-                        returnToMainSc = {this.returnToMainSc}
+                        backToMainSc = {this.backToMainSc}
+                        mode = {this.state.mode}
+                        modeChange = {this.modeChange} 
                     /> 
                     : 
-                    <MainScreen respondToApp = {this.respondToApp} /> 
+                    <MainScreen
+                        mode = {this.state.mode} 
+                        modeChange = {this.modeChange} 
+                        getInfoOfCountry = {this.getInfoOfCountry} 
+                    /> 
                 )}
             </div>
         )

@@ -26,6 +26,7 @@
             border : none ;
             display : inline-block ;
             padding: 11px 0px;
+            background-color: transparent;
             &:focus{
               outline : none ;
             }
@@ -52,7 +53,6 @@
                 align-items: center;
                 border-bottom : 1px solid rgba(black , .1) ;
                 cursor : pointer ;
-                &:hover{background-color: $Very-Light-Gray;}
                 &__name {margin : 0  auto ;}
                 &__flag {
                     width: 60px ;
@@ -66,6 +66,7 @@
         width: 210px;
         margin: 16px 0px;
         &-btn{
+            color: inherit;
             cursor: pointer;
             width: 100%;
             display: flex;
@@ -79,6 +80,7 @@
             &:focus{outline: none;}
         }
         &-list{
+            background-color: transparent;
             display: none;
             position: absolute;
             top:63px;

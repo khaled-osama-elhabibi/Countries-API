@@ -84,13 +84,39 @@ class MainScreen extends React.Component{
             }
         })
     }
-  
+    getBackgroundStyle(){
+        if(this.props.mode === "light"){
+            return{
+                color : "black" ,
+                backgroundColor : "hsl(0, 0%, 98%)"
+            }
+        }
+        else if (this.props.mode === "dark")
+        {
+            return{
+                color : "white",
+                backgroundColor : "hsl(207, 26%, 17%)"
+            }
+        }
+    }
     render(){
         return(
-            <div className = "main-screen">
-                <Bar/>
-                <ControlBar respondToApp = {this.props.respondToApp} respond = {this.respond}/>
-                <Countries respondToApp = {this.props.respondToApp} key = {this.state.key} data = {this.state.data}/>
+            <div style = {this.getBackgroundStyle()} className = "main-screen">
+                <Bar 
+                    modeChange={this.props.modeChange}
+                    mode = {this.props.mode}
+                />
+                <ControlBar 
+                    getInfoOfCountry = {this.props.getInfoOfCountry} 
+                    respond = {this.respond}
+                    mode = {this.props.mode}
+                />
+                <Countries 
+                    getInfoOfCountry = {this.props.getInfoOfCountry} 
+                    key = {this.state.key} 
+                    data = {this.state.data}
+                    mode = {this.props.mode}
+                />
             </div>
         )
     }

@@ -29,7 +29,12 @@ class CountryCard extends React.Component {
     getCountryBorder(arr){
         if( arr.length !== 0 ){
             return arr.map(Element => 
-            <CountryBorderBtn respond={this.props.respond} key = {Element} countryIsoCode = {Element} />
+            <CountryBorderBtn 
+                respond={this.props.respond} 
+                key = {Element} 
+                countryIsoCode = {Element} 
+                mode = {this.props.mode}    
+            />
             )
         }
         else{

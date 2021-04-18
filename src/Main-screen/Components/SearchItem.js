@@ -4,7 +4,7 @@ class SearchItem extends React.Component {
       this.clickHandler = this.clickHandler.bind(this) ;
     }
     clickHandler(){
-      this.props.respondToApp(this.props.countryCode)
+      this.props.getInfoOfCountry(this.props.countryCode)
     }
     render() {
       return (

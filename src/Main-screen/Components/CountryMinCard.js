@@ -5,7 +5,8 @@ class Countries extends React.Component{
     getListOfItems(){
         return this.props.data.map((Element,index)=>(
         <CountryMinCard 
-            respondToApp ={this.props.respondToApp} 
+            mode = {this.props.mode}
+            getInfoOfCountry ={this.props.getInfoOfCountry} 
             info = {Element} 
             key = {index}
 
@@ -27,11 +28,26 @@ class CountryMinCard extends React.Component{
         this.clickHandler = this.clickHandler.bind(this) ;
     }
     clickHandler(){
-        this.props.respondToApp(this.props.info.alpha3Code)
+        this.props.getInfoOfCountry(this.props.info.alpha3Code)
+    }
+    getElementStyle(){
+        if(this.props.mode === "light"){
+            return{
+                color : "black" ,
+                backgroundColor : "hsl(0, 0%, 100%)"
+            }
+        }
+        else if (this.props.mode === "dark")
+        {
+            return{
+                color : "white",
+                backgroundColor : "hsl(209, 23%, 22%)"
+            }
+        }
     }
     render(){
         return(
-            <div onClick={this.clickHandler} className = "country-min-card">
+            <div style ={this.getElementStyle()} onClick={this.clickHandler} className = "country-min-card">
                 <img className = "country-min-card__flag" src = {this.props.info.flag}/>
                 <div className = "country-min-card__name">{this.props.info.name}</div>
                 <ul className = "country-min-card__list">

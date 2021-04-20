@@ -19,8 +19,8 @@ class BackButton extends React.Component{
     }
     render(){
         return(
-            <div  onClick = {this.props.backToMainSc} className = "back-container">
-                <span style = {this.getElementStyle()} className = "back-button"><span className="material-icons">arrow_back</span>Back</span>
+            <div className = "back-container">
+                <span onClick = {this.props.backToMainSc} style = {this.getElementStyle()} className = "back-button"><span className="material-icons">arrow_back</span>Back</span>
             </div>
         )
     }
